@@ -84,7 +84,6 @@ public class Main {
         System.out.println("Front element: " + queue.peek());
     }
  
-    // Dequeue two elements (Task 1) using poll()
     static void dequeueTwo() {
  
         for (int i = 0; i < 2; i++) {
@@ -98,7 +97,6 @@ public class Main {
         System.out.println("Queue now: " + queue);
     }
  
-    // Copies the queue contents into an array WITHOUT modifying the queue
     static String[] toArray() {
         String[] items = new String[queue.size()];
         int i = 0;
@@ -108,7 +106,6 @@ public class Main {
         return items;
     }
  
-    // Reads and validates r (1..n); returns -1 if invalid
     static int readR(int n, String verb) {
         System.out.print("\nEnter number of elements to " + verb + ": ");
         int r = input.nextInt();
@@ -121,7 +118,6 @@ public class Main {
         return r;
     }
  
-    // Builds the text of a path of element indices, e.g. [0, 2] -> "AC"
     static String build(int[] path, String[] items) {
         StringBuilder sb = new StringBuilder();
         for (int p : path) {
@@ -144,8 +140,6 @@ public class Main {
         int r = readR(items.length, "arrange");
         if (r == -1) return;
  
-        // Work queue holds partial arrangements (arrays of indices).
-        // Level-by-level (FIFO) processing keeps results in order.
         Queue<int[]> work = new LinkedList<>();
         work.add(new int[0]);
  
@@ -161,7 +155,6 @@ public class Main {
             }
  
             for (int i = 0; i < items.length; i++) {
-                // skip elements already used in this arrangement
                 boolean used = false;
                 for (int p : path) {
                     if (p == i) {
@@ -208,8 +201,7 @@ public class Main {
                 count++;
                 continue;
             }
- 
-            // Only pick indices AFTER the last chosen one -> no duplicates (AB vs BA)
+         
             int start = path.length == 0 ? 0 : path[path.length - 1] + 1;
  
             for (int i = start; i < items.length; i++) {
